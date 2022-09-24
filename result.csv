@@ -1,0 +1,50 @@
+;Tsla
+Start;2022-03-02 00:00:00
+End;2022-06-03 00:00:00
+Duration;93 days 00:00:00
+Exposure Time [%];78.78787878787878
+Equity Final [$];1350309.1263171388
+Equity Peak [$];1463492.871272583
+Return [%];35.03091263171388
+Buy & Hold Return [%];-20.04114422481836
+Return (Ann.) [%];214.78764889497376
+Volatility (Ann.) [%];181.34285625985223
+Sharpe Ratio;1.184428509205774
+Sortino Ratio;7.801872614009564
+Calmar Ratio;13.562809204795615
+Max. Drawdown [%];-15.836516288898906
+Avg. Drawdown [%];-4.6361634489752905
+Max. Drawdown Duration;35 days 00:00:00
+Avg. Drawdown Duration;9 days 00:00:00
+# Trades;3
+Win Rate [%];66.66666666666666
+Best Trade [%];26.63930788779627
+Worst Trade [%];-0.29910269192421346
+Avg. Trade [%];10.531447611320367
+Max. Trade Duration;52 days 00:00:00
+Avg. Trade Duration;25 days 00:00:00
+Profit Factor;112.30781888710646
+Expectancy [%];11.097489420448785
+SQN;1.347181713610313
+_strategy;Strategy_SMA(n=7,m=12)
+_equity_curve;"                  Equity  DrawdownPct DrawdownDuration
+Date                                                  
+2022-03-02  1.000000e+06     0.000000              NaT
+2022-03-03  1.000000e+06     0.000000              NaT
+2022-03-04  1.000000e+06     0.000000              NaT
+2022-03-07  1.000000e+06     0.000000              NaT
+2022-03-08  1.000000e+06     0.000000              NaT
+...                  ...          ...              ...
+2022-05-27  1.322163e+06     0.096571              NaT
+2022-05-31  1.323635e+06     0.095564              NaT
+2022-06-01  1.342867e+06     0.082423              NaT
+2022-06-02  1.305640e+06     0.107860              NaT
+2022-06-03  1.350309e+06     0.077338          10 days
+
+[66 rows x 3 columns]"
+_trades;"   Size  EntryBar  ExitBar  ...  EntryTime   ExitTime  Duration
+0  1072        14       29  ... 2022-03-22 2022-04-12   21 days
+1 -1075        29       65  ... 2022-04-12 2022-06-03   52 days
+2  1850        65       65  ... 2022-06-03 2022-06-03    0 days
+
+[3 rows x 10 columns]"
