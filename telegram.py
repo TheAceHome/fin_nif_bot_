@@ -156,9 +156,8 @@ async def process_start_command(message: types.Message, state: FSMContext):
 async def process_start_command(message: types.Message):
     await bot.send_message(message.from_user.id,
                            text=MESSAGES['start'])
-#
-#
-#TODO Падает в файле graphics
+
+
 @dp.message_handler(commands=['plots'])
 async def handle_text(message: types.Message, state: FSMContext):
     try:
