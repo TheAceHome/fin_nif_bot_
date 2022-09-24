@@ -8,9 +8,7 @@ from aiogram.utils import executor
 from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import ReplyKeyboardRemove, \
-    ReplyKeyboardMarkup, KeyboardButton, \
-    InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
 import aioschedule
 import pandas as pd
@@ -20,7 +18,7 @@ import graphics
 import strategy_final
 import subs
 
-API_TOKEN = 'API_TOKEN'
+API_TOKEN = '1126013987:AAGc1GzxCvdPf6KZBxAPXP7y_4ZoFEtDlbo'
 bot = Bot(token=API_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
@@ -40,30 +38,37 @@ class Form(StatesGroup):
 
 
 class DateTimeException(Exception):
+    print("DateTimeException")
     pass
 
 
 class FutureDataDoesNotExistsException(Exception):
+    print("FutureDataDoesNotExistsException")
     pass
 
 
 class FirstDateBiggerThanSecondException(Exception):
+    print("FirstDateBiggerThanSecondException")
     pass
 
 
 class DatesCannotBeEqualException(Exception):
+    print("DatesCannotBeEqualException")
     pass
 
 
 class TickerDoesNotExistsException(Exception):
+    print("TickerDoesNotExistsException")
     pass
 
 
 class GraphDoesNotExistsException(Exception):
+    print("GraphDoesNotExistsException")
     pass
 
 
 class SmaValuesException(Exception):
+    print("SmaValuesException")
     pass
 
 
@@ -112,8 +117,8 @@ def check_sub_tickers(tickers):
     for ticker in tickers.split(","):
         check_ticker(ticker)
     return tickers.lower()
-
-
+#
+#
 def check_sub_sma_values(tickers, sma):
     if len(sma.split(" ")) == 1:
         return " ".join(sma.split(" ") * len(tickers.split(",")))
@@ -151,8 +156,9 @@ async def process_start_command(message: types.Message, state: FSMContext):
 async def process_start_command(message: types.Message):
     await bot.send_message(message.from_user.id,
                            text=MESSAGES['start'])
-
-
+#
+#
+#TODO Падает в файле graphics
 @dp.message_handler(commands=['plots'])
 async def handle_text(message: types.Message, state: FSMContext):
     try:
@@ -497,7 +503,7 @@ async def send_indicator():
 
 
 async def scheduler():
-    aioschedule.every().day.at("09:30").do(send_indicator)
+    aioschedule.every().day.at("09:45").do(send_indicator)
     while True:
         await aioschedule.run_pending()
         await asyncio.sleep(1)
