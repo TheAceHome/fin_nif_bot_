@@ -161,7 +161,7 @@ def strategy(ticker, start_date, end_date):
 
 
 def comp_strategy():
-    df = pd.read_csv('database.csv', header=0, sep=';')
+    df = pd.read_csv('db/database.csv', header=0, sep=';')
     date = datetime.today().strftime('%Y-%m-%d')
     for ind in range(len(df['user_id'])):
         ticker = df['tickers'][ind]

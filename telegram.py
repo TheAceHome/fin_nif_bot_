@@ -8,7 +8,8 @@ from aiogram.utils import executor
 from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
+from aiogram.types import ReplyKeyboardRemove, ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, \
+    InlineKeyboardButton
 import asyncio
 import aioschedule
 import pandas as pd
@@ -117,8 +118,8 @@ def check_sub_tickers(tickers):
     for ticker in tickers.split(","):
         check_ticker(ticker)
     return tickers.lower()
-#
-#
+
+
 def check_sub_sma_values(tickers, sma):
     if len(sma.split(" ")) == 1:
         return " ".join(sma.split(" ") * len(tickers.split(",")))
@@ -354,7 +355,7 @@ async def process_name(message: types.Message, state: FSMContext):
         async with state.proxy() as data:
             data['stop'] = check_second_date(data['start'], message.text)
         strategy_final.strategy(data['ticker'], data['start'], data['stop'])
-        await bot.send_document(message.from_user.id, open('result.csv', 'rb'))
+        await bot.send_document(message.from_user.id, open('db/result.csv', 'rb'))
         await bot.send_message(message.from_user.id,
                                text=MESSAGES["suggest_notification"])
         await bot.send_message(message.from_user.id,
@@ -483,22 +484,11 @@ async def process_name(message: types.Message, state: FSMContext):
 ###Отправка индикаторов###
 async def send_indicator():
     strategy_final.comp_strategy()
-    df = pd.read_csv('database.csv', header=0, sep=';')
+    df = pd.read_csv('db/database.csv', header=0, sep=';')
     for user_id in df['user_id'].unique():
         u_data = df[df['user_id'] == user_id][['tickers', 'actions_all']]
         msg = "\n".join([f"{d[0]} - {d[1]}" for d in u_data.values])
         await bot.send_message(user_id, text=msg)
-
-
-'''async def send_indicator():
-    try:
-        strategy_final.comp_strategy()
-        df = pd.read_csv('database.csv', header=0, sep=';')
-        for index, row in df.iterrows():
-            for i in range(len(row.tickers.split(','))):
-                await bot.send_message(row.user_id, text = 'Ти:{0} Дейс:{1}'.format(row.tickers.split(',')[i], re.sub("'", "", row.actions_all[1:-1]).replace(' ', '').split(',')[i]))
-    except:
-        print('Ошибка в send_indicator()')'''
 
 
 async def scheduler():
@@ -514,7 +504,7 @@ async def on_startup(_):
 
 
 if __name__ == '__main__':
-    with open("reply_messages.json", "r", encoding="utf-8") as f:
+    with open("messages/reply_messages.json", "r", encoding="utf-8") as f:
         MESSAGES = json.load(f)
     executor.start_polling(dp, skip_updates=False,
                            on_startup=on_startup)

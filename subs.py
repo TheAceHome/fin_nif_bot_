@@ -2,7 +2,7 @@ import pandas as pd
 
 def set_tickers(user, tickers, sma):
     print(user)
-    df = pd.read_csv('database.csv', header=0, sep=';')
+    df = pd.read_csv('db/database.csv', header=0, sep=';')
     print(df)
     for ticker in list(zip(tickers.split(","), sma.split(" "))):
         if ticker[0] not in df[df['user_id'] == user].tickers.values:
@@ -12,7 +12,7 @@ def set_tickers(user, tickers, sma):
 
 def del_tic(user_id, tickers):
     tickers = tickers.lower()
-    df = pd.read_csv('database.csv', header=0, sep=';')
+    df = pd.read_csv('db/database.csv', header=0, sep=';')
     if tickers == "отписка":
         df = df.drop(df[df["user_id"] == user_id].index)
     else:
@@ -22,7 +22,7 @@ def del_tic(user_id, tickers):
 
 
 def sub_ticker_list(user_id):
-    df = pd.read_csv('database.csv', header=0, sep=';')
+    df = pd.read_csv('db/database.csv', header=0, sep=';')
     user_tickers = df[df['user_id'] == user_id].tickers.values
     msg = "\n".join(user_tickers)
     return msg
